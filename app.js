@@ -11,11 +11,11 @@ app.use(express.static("public"));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
-app.use('/users', require("./routes/users"));
-app.use('/wiki', require("./routes/wiki"));
+app.use("/users", require("./routes/users"));
+app.use("/wiki", require("./routes/wiki"));
 
 app.get("/", (req, res) => {
-  res.redirect('/wiki');
+  res.redirect("/wiki");
 });
 
 db.authenticate().then(() => {
@@ -23,9 +23,9 @@ db.authenticate().then(() => {
 });
 
 (async () => {
-  await db.sync();
+  await db.sync({ force: true });
 })();
 
 app.listen("8080", () => {
-  console.log("app listening in port 8080");
+  console.log("app listeningg in port 8080");
 });
