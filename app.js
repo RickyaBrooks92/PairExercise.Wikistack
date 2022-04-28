@@ -1,7 +1,7 @@
 const express = require("express");
 const morgan = require("morgan");
 const main = require("./views/main");
-const { db, User, Page } = require("./models");
+const { db } = require("./models");
 
 const app = express();
 
@@ -11,8 +11,11 @@ app.use(express.static("public"));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
+app.use('/users', require("./routes/users"));
+app.use('/wiki', require("./routes/wiki"));
+
 app.get("/", (req, res) => {
-  res.send(main());
+  res.redirect('/wiki');
 });
 
 db.authenticate().then(() => {
